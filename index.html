@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAYMENT SARZZ</title>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+    body {
+        background: url('https://img1.pixhost.to/images/8207/634653959_zion.jpg') no-repeat center center fixed;
+        background-size: cover;
+        color:#fff;
+        min-height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        overflow-x:hidden;
+    }
+
+    /* Halaman utama */
+    #page1, #page2 { 
+        position:absolute; width:100%; height:100%; 
+        display:flex; flex-direction:column; 
+        justify-content:center; align-items:center; 
+        transition: all 0.7s ease; 
+    }
+    #page2 { opacity:0; pointer-events:none; }
+
+    /* Logo */
+    .logo {
+        width:160px;
+        height:160px;
+        margin-bottom:30px;
+        border-radius:50%;
+        background:white url('https://img1.pixhost.to/images/8207/634654031_zion.jpg') center/cover no-repeat;
+        box-shadow:0 15px 30px rgba(0,0,0,0.4);
+        animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-15px);} }
+
+    /* Tombol */
+    .btn { 
+        padding:12px 35px; border:none; border-radius:50px; 
+        background:rgba(255,255,255,0.25); color:#fff; 
+        font-size:1rem; cursor:pointer; transition:all 0.3s ease; 
+        box-shadow:0 5px 15px rgba(0,0,0,0.3); 
+        backdrop-filter: blur(10px);
+    }
+    .btn:hover { 
+        transform:translateY(-3px) scale(1.05); 
+        background:rgba(255,255,255,0.4);
+    }
+
+    /* Container pembayaran */
+    .payment-container {
+        display:flex;
+        gap:40px;
+        background: rgba(255,255,255,0.15);
+        padding:30px;
+        border-radius:25px;
+        backdrop-filter: blur(20px);
+        box-shadow:0 15px 30px rgba(0,0,0,0.4);
+        flex-wrap:wrap;
+        justify-content:center;
+        align-items:flex-start;
+    }
+
+    /* Box QRIS, DANA, GOPAY */
+    .pay-box { 
+        background: rgba(255,255,255,0.2); 
+        padding:30px 20px; 
+        border-radius:20px; 
+        text-align:center; 
+        flex:1 1 250px; 
+        max-width:300px; 
+        box-shadow:0 10px 25px rgba(0,0,0,0.3); 
+        backdrop-filter: blur(15px);
+        transition: transform 0.3s ease;
+    }
+    .pay-box:hover { transform: translateY(-5px); }
+    .pay-box img { 
+        width:100%; height:auto; border-radius:20px; 
+        border:2px solid rgba(255,255,255,0.7); 
+        transition: transform 0.3s ease; 
+    }
+    .pay-box img:hover { transform: scale(1.05); }
+
+    /* Copy pesan */
+    .copy-message { 
+        margin-top:10px; color:white; font-weight:bold; 
+        opacity:0; transition: opacity 0.3s; font-size:1rem; 
+    }
+
+    @media screen and (max-width:768px) {
+        .payment-container { flex-direction:column; align-items:center; gap:20px; }
+        .pay-box { max-width:90%; flex:1 1 auto; }
+    }
+
+    /* Overlay fullscreen QRIS */
+    #overlay { 
+        position:fixed; top:0; left:0; width:100%; height:100%; 
+        background: rgba(0,0,0,0.9); 
+        display:flex; justify-content:center; align-items:center; 
+        opacity:0; pointer-events:none; 
+        transition: opacity 0.3s ease; z-index:100; 
+        flex-direction:column; 
+    }
+    #overlay img { max-width:90%; max-height:90%; border-radius:20px; border:3px solid #fff; }
+    #closeOverlay { 
+        position:absolute; top:20px; right:20px; 
+        background:rgba(255,255,255,0.25); color:#fff; 
+        padding:10px 20px; border:none; border-radius:10px; 
+        cursor:pointer; font-size:1rem; 
+        box-shadow:0 5px 15px rgba(0,0,0,0.3);
+        backdrop-filter: blur(10px);
+    }
+    #closeOverlay:hover { background:rgba(255,255,255,0.4); }
+</style>
+</head>
+<body>
+
+<!-- Halaman Utama -->
+<div id="page1">
+    <div class="logo"></div>
+    <button class="btn" onclick="goToPage2()">Payment</button>
+</div>
+
+<!-- Halaman Pembayaran -->
+<div id="page2">
+    <div class="payment-container">
+        <!-- QRIS -->
+        <div class="pay-box" id="qrisBox">
+            <h2>QRIS</h2>
+            <img src="https://img1.pixhost.to/images/8207/634654268_zion.jpg" alt="QRIS">
+            <button class="btn zoom-btn" id="zoomQrisBtn">Perbesar</button>
+        </div>
+        <!-- DANA -->
+        <div class="pay-box">
+            <h2>DANA</h2>
+            <button class="btn" id="copyDanaBtn">Salin</button>
+            <div id="danaMessage" class="copy-message">Nomor DANA berhasil disalin</div>
+        </div>
+        <!-- GOPAY -->
+        <div class="pay-box">
+            <h2>GoPay</h2>
+            <button class="btn" id="copyGopayBtn">Salin</button>
+            <div id="gopayMessage" class="copy-message">Nomor GoPay berhasil disalin</div>
+        </div>
+    </div>
+</div>
+
+<!-- Overlay fullscreen QRIS -->
+<div id="overlay">
+    <button id="closeOverlay">Kembali</button>
+    <img id="fullQris" src="" alt="QRIS Fullscreen">
+</div>
+
+<script>
+    function goToPage2() {
+        document.getElementById('page1').style.opacity = 0;
+        document.getElementById('page1').style.pointerEvents = 'none';
+        document.getElementById('page2').style.opacity = 1;
+        document.getElementById('page2').style.pointerEvents = 'all';
+    }
+
+    // Nomor pembayaran
+    const danaNumber = "082180766110";
+    const gopayNumber = "082180766110";
+
+    // Copy DANA
+    const copyDanaBtn = document.getElementById('copyDanaBtn');
+    const danaMessage = document.getElementById('danaMessage');
+    copyDanaBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(danaNumber).then(() => {
+            danaMessage.style.opacity = 1;
+            setTimeout(() => { danaMessage.style.opacity = 0; }, 2000);
+        });
+    });
+
+    // Copy GOPAY
+    const copyGopayBtn = document.getElementById('copyGopayBtn');
+    const gopayMessage = document.getElementById('gopayMessage');
+    copyGopayBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(gopayNumber).then(() => {
+            gopayMessage.style.opacity = 1;
+            setTimeout(() => { gopayMessage.style.opacity = 0; }, 2000);
+        });
+    });
+
+    // Fullscreen QRIS
+    const zoomQrisBtn = document.getElementById('zoomQrisBtn');
+    const overlay = document.getElementById('overlay');
+    const fullQris = document.getElementById('fullQris');
+    const closeOverlay = document.getElementById('closeOverlay');
+
+    zoomQrisBtn.addEventListener('click', () => {
+        const qrisImg = document.querySelector('#qrisBox img').src;
+        fullQris.src = qrisImg;
+        overlay.style.opacity = 1;
+        overlay.style.pointerEvents = 'all';
+    });
+
+    closeOverlay.addEventListener('click', () => {
+        overlay.style.opacity = 0;
+        overlay.style.pointerEvents = 'none';
+    });
+
+    overlay.addEventListener('click', (e) => {
+        if(e.target === overlay) {
+            overlay.style.opacity = 0;
+            overlay.style.pointerEvents = 'none';
+        }
+    });
+</script>
+
+</body>
+</html>
