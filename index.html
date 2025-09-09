@@ -1,224 +1,276 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="theme-color" content="#000000"/>
- <title>Payment Sarzz</title>
-  <meta name="description" content="All payment Sarzz Official"/>
-  <meta property="og:title" content="All payment Sarzz Official"/>
-  <meta property="og:image" content="https://img1.pixhost.to/images/8193/634453755_zion.jpg"/>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
-    body {
-        background: url('https://img1.pixhost.to/images/8207/634653959_zion.jpg') no-repeat center center fixed;
-        background-size: cover;
-        color:#fff;
-        min-height:100vh;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        overflow-x:hidden;
-    }
-
-    /* Halaman utama */
-    #page1, #page2 { 
-        position:absolute; width:100%; height:100%; 
-        display:flex; flex-direction:column; 
-        justify-content:center; align-items:center; 
-        transition: all 0.7s ease; 
-    }
-    #page2 { opacity:0; pointer-events:none; }
-
-    /* Logo */
-    .logo {
-        width:160px;
-        height:160px;
-        margin-bottom:30px;
-        border-radius:50%;
-        background:white url('https://img1.pixhost.to/images/8207/634654031_zion.jpg') center/cover no-repeat;
-        box-shadow:0 15px 30px rgba(0,0,0,0.4);
-        animation: float 3s ease-in-out infinite;
-    }
-    @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-15px);} }
-
-    /* Tombol */
-    .btn { 
-        padding:12px 35px; border:none; border-radius:50px; 
-        background:rgba(255,255,255,0.25); color:#fff; 
-        font-size:1rem; cursor:pointer; transition:all 0.3s ease; 
-        box-shadow:0 5px 15px rgba(0,0,0,0.3); 
-        backdrop-filter: blur(10px);
-    }
-    .btn:hover { 
-        transform:translateY(-3px) scale(1.05); 
-        background:rgba(255,255,255,0.4);
-    }
-
-    /* Container pembayaran */
-    .payment-container {
-        display:flex;
-        gap:40px;
-        background: rgba(255,255,255,0.15);
-        padding:30px;
-        border-radius:25px;
-        backdrop-filter: blur(20px);
-        box-shadow:0 15px 30px rgba(0,0,0,0.4);
-        flex-wrap:wrap;
-        justify-content:center;
-        align-items:flex-start;
-    }
-
-    /* Box QRIS, DANA, GOPAY */
-    .pay-box { 
-        background: rgba(255,255,255,0.2); 
-        padding:30px 20px; 
-        border-radius:20px; 
-        text-align:center; 
-        flex:1 1 250px; 
-        max-width:300px; 
-        box-shadow:0 10px 25px rgba(0,0,0,0.3); 
-        backdrop-filter: blur(15px);
-        transition: transform 0.3s ease;
-    }
-    .pay-box:hover { transform: translateY(-5px); }
-    .pay-box img { 
-        width:100%; height:auto; border-radius:20px; 
-        border:2px solid rgba(255,255,255,0.7); 
-        transition: transform 0.3s ease; 
-    }
-    .pay-box img:hover { transform: scale(1.05); }
-
-    /* Copy pesan */
-    .copy-message { 
-        margin-top:10px; color:white; font-weight:bold; 
-        opacity:0; transition: opacity 0.3s; font-size:1rem; 
-    }
-
-    @media screen and (max-width:768px) {
-        .payment-container { flex-direction:column; align-items:center; gap:20px; }
-        .pay-box { max-width:90%; flex:1 1 auto; }
-    }
-
-    /* Overlay fullscreen QRIS */
-    #overlay { 
-        position:fixed; top:0; left:0; width:100%; height:100%; 
-        background: rgba(0,0,0,0.9); 
-        display:flex; justify-content:center; align-items:center; 
-        opacity:0; pointer-events:none; 
-        transition: opacity 0.3s ease; z-index:100; 
-        flex-direction:column; 
-    }
-    #overlay img { max-width:90%; max-height:90%; border-radius:20px; border:3px solid #fff; }
-    #closeOverlay { 
-        position:absolute; top:20px; right:20px; 
-        background:rgba(255,255,255,0.25); color:#fff; 
-        padding:10px 20px; border:none; border-radius:10px; 
-        cursor:pointer; font-size:1rem; 
-        box-shadow:0 5px 15px rgba(0,0,0,0.3);
-        backdrop-filter: blur(10px);
-    }
-    #closeOverlay:hover { background:rgba(255,255,255,0.4); }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Sarzz Market Shop</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Poppins',sans-serif;
+  background:#0f1115;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:40px 15px;
+  min-height:100vh;
+  color:#e5e;
+}
+.logo{
+  width:220px;
+  border-radius:28px;
+  margin-bottom:20px;
+  border:none;
+  box-shadow:0 10px 25px rgba(0,0,0,0.6);
+  transition:transform .3s,box-shadow .3s;
+}
+.logo:hover{
+  transform:scale(1.07);
+  box-shadow:0 14px 30px rgba(0,0,0,.8);
+}
+.name{
+  font-size:28px;
+  font-weight:800;
+  margin-bottom:40px;
+  text-transform:uppercase;
+  position:relative;
+  color:#fff;
+  text-align:center;
+}
+.name::after{
+  content:"";
+  display:block;
+  width:200px;height:4px;
+  background:linear-gradient(90deg,white,white);
+  margin:12px auto 0;
+  border-radius:4px;
+}
+.card{
+  width:100%;
+  max-width:450px;
+  background:#1c1f28;
+  border-radius:22px;
+  margin-bottom:25px;
+  overflow:hidden;
+  border:none;
+  box-shadow:0 8px 28px rgba(0,0,0,.8);
+  transition:.4s;
+}
+.card:hover{
+  box-shadow:0 14px 38px rgba(0,0,0,.9);
+  transform:translateY(-2px);
+}
+.toggle-btn{
+  width:100%;
+  padding:18px 22px;
+  background:#1c1f28;
+  border:none;
+  border-bottom:1px solid #2a2d38;
+  font-size:16px;font-weight:600;
+  cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;
+  position:relative;
+  transition:.3s;
+  color:#e5e7eb;
+}
+.toggle-btn span.label{display:flex;align-items:center;gap:12px}
+.toggle-btn i{width:22px;height:22px;transition:.3s;color:#fff;}
+.toggle-btn.active i{transform:scale(1.2)}
+.toggle-btn::before{
+  content:"";position:absolute;left:0;bottom:0;width:100%;height:4px;
+  background:linear-gradient(90deg,#fff,#e5e7eb);
+  transform:scaleX(0);transform-origin:left;transition:.3s
+}
+.toggle-btn.active::before{transform:scaleX(1)}
+.toggle-btn:hover{background:#25272f}
+.arrow{transition:.3s;font-size:18px;color:#fff}
+.rotate{transform:rotate(90deg)}
+.content{max-height:0;overflow:hidden;transition:max-height .4s,opacity .3s,padding .3s;opacity:0;padding:0 22px}
+.content.show{max-height:600px;opacity:1;padding:22px}
+.qris-img{
+  width:160px;
+  max-width:100%;
+  border-radius:20px;
+  display:block;
+  margin:0 auto 18px;
+  box-shadow:0 8px 25px rgba(0,0,0,.8);
+  transition:.3s;
+}
+.action-btn{
+  margin:0 auto;
+  padding:14px 22px;
+  background:#fff;
+  border:none;
+  border-radius:16px;
+  font-size:15px;
+  cursor:pointer;
+  display:flex;align-items:center;gap:8px;
+  color:#111;font-weight:600;
+  transition:.3s;
+}
+.action-btn:hover{
+  background:#e5e7eb;
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(0,0,0,.5)
+}
+.info{
+  background:#2a2d38;
+  border-radius:18px;
+  padding:22px;
+  text-align:center;
+  font-size:16px;
+  color:#e5e7eb;
+  line-height:1.6;
+  box-shadow:0 6px 18px rgba(0,0,0,.7);
+}
+.toast{
+  position:fixed;bottom:30px;left:50%;transform:translateX(-50%);
+  background:#111;color:#fff;padding:14px 20px;
+  border-radius:14px;font-size:14px;opacity:0;
+  pointer-events:none;transition:.3s
+}
+.toast.show{opacity:1}
+.modal{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(0,0,0,0.9);
+  display:flex;justify-content:center;align-items:center;
+  opacity:0;pointer-events:none;transition:.3s
+}
+.modal.show{opacity:1;pointer-events:auto}
+.modal-content{
+  position:relative;
+  background:#1c1f28;
+  border-radius:24px;
+  padding:22px;
+  max-width:92%;max-height:92%;
+  display:flex;flex-direction:column;align-items:center;
+  box-shadow:0 12px 40px rgba(0,0,0,.85);
+  animation:zoomIn .3s ease;
+}
+.modal-content img{
+  width:100%;max-height:75vh;object-fit:contain;
+  border-radius:18px;
+}
+.close-btn{
+  margin-top:18px;
+  padding:12px 22px;
+  background:#ef4444;
+  border:none;border-radius:16px;
+  color:#fff;font-weight:600;
+  cursor:pointer;transition:.3s
+}
+.close-btn:hover{background:#dc2626}
+@keyframes zoomIn{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
 </style>
 </head>
 <body>
 
-<!-- Halaman Utama -->
-<div id="page1">
-    <div class="logo"></div>
-    <button class="btn" onclick="goToPage2()">Payment</button>
+<img src="https://files.catbox.moe/a3q01e.jpg" alt="Logo" class="logo">
+
+<div class="name">Payment Sarzz Market Shop</div>
+
+<!-- QRIS -->
+<div class="card">
+  <button class="toggle-btn" onclick="toggleShow('qris', this)">
+    <span class="label"><i data-lucide="qr-code"></i> PAYMENT QRIS</span>
+    <span class="arrow">&gt;</span>
+  </button>
+  <div id="qris" class="content">
+    <img src="https://files.catbox.moe/gt5gs5.jpg" alt="QRIS" class="qris-img">
+    <button class="action-btn" onclick="openModal()">
+      <i data-lucide="maximize-2"></i> Perbesar Qris
+    </button>
+  </div>
 </div>
 
-<!-- Halaman Pembayaran -->
-<div id="page2">
-    <div class="payment-container">
-        <!-- QRIS -->
-        <div class="pay-box" id="qrisBox">
-            <h2>QRIS</h2>
-            <img src="https://img1.pixhost.to/images/8207/634654268_zion.jpg" alt="QRIS">
-            <button class="btn zoom-btn" id="zoomQrisBtn">Perbesar</button>
-        </div>
-        <!-- DANA -->
-        <div class="pay-box">
-            <h2>DANA</h2>
-            <button class="btn" id="copyDanaBtn">Salin</button>
-            <div id="danaMessage" class="copy-message">Nomor DANA berhasil disalin</div>
-        </div>
-        <!-- GOPAY -->
-        <div class="pay-box">
-            <h2>GoPay</h2>
-            <button class="btn" id="copyGopayBtn">Salin</button>
-            <div id="gopayMessage" class="copy-message">Nomor GoPay berhasil disalin</div>
-        </div>
+<!-- DANA -->
+<div class="card">
+  <button class="toggle-btn" onclick="toggleShow('dana', this)">
+    <span class="label"><i data-lucide="wallet"></i> PAYMENT DANA</span>
+    <span class="arrow">&gt;</span>
+  </button>
+  <div id="dana" class="content">
+    <div class="info">
+      <p><b>Nama  :</b> Ratna</p>
+      <p><b>Nomor :</b> 082180766110</p>
+      <button class="action-btn" onclick="copyNumber('082180766110')">
+        <i data-lucide="copy"></i> Copy Number
+      </button>
     </div>
+  </div>
 </div>
 
-<!-- Overlay fullscreen QRIS -->
-<div id="overlay">
-    <button id="closeOverlay">Kembali</button>
-    <img id="fullQris" src="" alt="QRIS Fullscreen">
+<!-- OVO -->
+<div class="card">
+  <button class="toggle-btn" onclick="toggleShow('ovo', this)">
+    <span class="label"><i data-lucide="credit-card"></i> PAYMENT OVO</span>
+    <span class="arrow">&gt;</span>
+  </button>
+  <div id="ovo" class="content">
+    <div class="info">
+      <p><b>Nama  :</b> SarzzStoreJb</p>
+      <p><b>Nomor :</b> 082180766110</p>
+      <button class="action-btn" onclick="copyNumber('082180766110')">
+        <i data-lucide="copy"></i> Copy Number
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- GOPAY -->
+<div class="card">
+  <button class="toggle-btn" onclick="toggleShow('gopay', this)">
+    <span class="label"><i data-lucide="dollar-sign"></i> PAYMENT GOPAY</span>
+    <span class="arrow">&gt;</span>
+  </button>
+  <div id="gopay" class="content">
+    <div class="info">
+      <p><b>Nama  :</b> SarzX-OFFICIAL</p>
+      <p><b>Nomor :</b> 082180766110</p>
+      <button class="action-btn" onclick="copyNumber('082180766110')">
+        <i data-lucide="copy"></i> Copy Number
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast">Nomor berhasil disalin!</div>
+
+<div id="qrisModal" class="modal">
+  <div class="modal-content">
+    <img src="https://files.catbox.moe/gt5gs5.jpg" alt="QRIS Fullscreen">
+    <button class="close-btn" onclick="closeModal()">Tutup</button>
+  </div>
 </div>
 
 <script>
-    function goToPage2() {
-        document.getElementById('page1').style.opacity = 0;
-        document.getElementById('page1').style.pointerEvents = 'none';
-        document.getElementById('page2').style.opacity = 1;
-        document.getElementById('page2').style.pointerEvents = 'all';
-    }
-
-    // Nomor pembayaran
-    const danaNumber = "082180766110";
-    const gopayNumber = "082180766110";
-
-    // Copy DANA
-    const copyDanaBtn = document.getElementById('copyDanaBtn');
-    const danaMessage = document.getElementById('danaMessage');
-    copyDanaBtn.addEventListener('click', () => {
-        navigator.clipboard.writeText(danaNumber).then(() => {
-            danaMessage.style.opacity = 1;
-            setTimeout(() => { danaMessage.style.opacity = 0; }, 2000);
-        });
-    });
-
-    // Copy GOPAY
-    const copyGopayBtn = document.getElementById('copyGopayBtn');
-    const gopayMessage = document.getElementById('gopayMessage');
-    copyGopayBtn.addEventListener('click', () => {
-        navigator.clipboard.writeText(gopayNumber).then(() => {
-            gopayMessage.style.opacity = 1;
-            setTimeout(() => { gopayMessage.style.opacity = 0; }, 2000);
-        });
-    });
-
-    // Fullscreen QRIS
-    const zoomQrisBtn = document.getElementById('zoomQrisBtn');
-    const overlay = document.getElementById('overlay');
-    const fullQris = document.getElementById('fullQris');
-    const closeOverlay = document.getElementById('closeOverlay');
-
-    zoomQrisBtn.addEventListener('click', () => {
-        const qrisImg = document.querySelector('#qrisBox img').src;
-        fullQris.src = qrisImg;
-        overlay.style.opacity = 1;
-        overlay.style.pointerEvents = 'all';
-    });
-
-    closeOverlay.addEventListener('click', () => {
-        overlay.style.opacity = 0;
-        overlay.style.pointerEvents = 'none';
-    });
-
-    overlay.addEventListener('click', (e) => {
-        if(e.target === overlay) {
-            overlay.style.opacity = 0;
-            overlay.style.pointerEvents = 'none';
-        }
-    });
+lucide.createIcons();
+function toggleShow(id, btn){
+  const section=document.getElementById(id);
+  const arrow=btn.querySelector(".arrow");
+  section.classList.toggle("show");
+  arrow.classList.toggle("rotate");
+  btn.classList.toggle("active");
+}
+function copyNumber(num){
+  navigator.clipboard.writeText(num).then(()=>{
+    showToast("Nomor berhasil disalin!");
+  });
+}
+function showToast(msg){
+  const toast=document.getElementById("toast");
+  toast.textContent=msg;
+  toast.classList.add("show");
+  setTimeout(()=>toast.classList.remove("show"),2000);
+}
+function openModal(){
+  document.getElementById("qrisModal").classList.add("show");
+}
+function closeModal(){
+  document.getElementById("qrisModal").classList.remove("show");
+}
 </script>
 
 </body>
