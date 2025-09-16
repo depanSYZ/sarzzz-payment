@@ -62,44 +62,17 @@ body{
   box-shadow:0 14px 38px rgba(0,0,0,.9);
   transform:translateY(-2px);
 }
-.toggle-btn{
-  width:100%;
-  padding:18px 22px;
-  background:#1c1f28;
-  border:none;
-  border-bottom:1px solid #2a2d38;
-  font-size:16px;font-weight:600;
-  cursor:pointer;
-  display:flex;justify-content:space-between;align-items:center;
-  position:relative;
-  transition:.3s;
-  color:#e5e7eb;
-}
-.toggle-btn span.label{display:flex;align-items:center;gap:12px}
-.toggle-btn i{width:22px;height:22px;transition:.3s;color:#fff;}
-.toggle-btn.active i{transform:scale(1.2)}
-.toggle-btn::before{
-  content:"";position:absolute;left:0;bottom:0;width:100%;height:4px;
-  background:linear-gradient(90deg,#fff,#e5e7eb);
-  transform:scaleX(0);transform-origin:left;transition:.3s
-}
-.toggle-btn.active::before{transform:scaleX(1)}
-.toggle-btn:hover{background:#25272f}
-.arrow{transition:.3s;font-size:18px;color:#fff}
-.rotate{transform:rotate(90deg)}
-.content{max-height:0;overflow:hidden;transition:max-height .4s,opacity .3s,padding .3s;opacity:0;padding:0 22px}
-.content.show{max-height:600px;opacity:1;padding:22px}
 .qris-img{
   width:160px;
   max-width:100%;
   border-radius:20px;
   display:block;
-  margin:0 auto 18px;
+  margin:22px auto 18px;
   box-shadow:0 8px 25px rgba(0,0,0,.8);
   transition:.3s;
 }
 .action-btn{
-  margin:0 auto;
+  margin:0 auto 22px;
   padding:14px 22px;
   background:#fff;
   border:none;
@@ -171,68 +144,48 @@ body{
 
 <div class="name">Payment Sarzz Market Shop</div>
 
-<!-- QRIS -->
+<!-- QRIS langsung tampil -->
 <div class="card">
-  <button class="toggle-btn" onclick="toggleShow('qris', this)">
-    <span class="label"><i data-lucide="qr-code"></i> PAYMENT QRIS</span>
-    <span class="arrow">&gt;</span>
+  <h3 style="color:#fff;text-align:center;padding:18px 0;">PAYMENT QRIS</h3>
+  <img src="https://files.catbox.moe/gt5gs5.jpg" alt="QRIS" class="qris-img">
+  <button class="action-btn" onclick="openModal()">
+    <i data-lucide="maximize-2"></i> Perbesar Qris
   </button>
-  <div id="qris" class="content">
-    <img src="https://files.catbox.moe/gt5gs5.jpg" alt="QRIS" class="qris-img">
-    <button class="action-btn" onclick="openModal()">
-      <i data-lucide="maximize-2"></i> Perbesar Qris
-    </button>
-  </div>
 </div>
 
 <!-- DANA -->
 <div class="card">
-  <button class="toggle-btn" onclick="toggleShow('dana', this)">
-    <span class="label"><i data-lucide="wallet"></i> PAYMENT DANA</span>
-    <span class="arrow">&gt;</span>
-  </button>
-  <div id="dana" class="content">
-    <div class="info">
-      <p><b>Nama  :</b> Ratna</p>
-      <p><b>Nomor :</b> 082180766110</p>
-      <button class="action-btn" onclick="copyNumber('082180766110')">
-        <i data-lucide="copy"></i> Copy Number
-      </button>
-    </div>
+  <h3 style="color:#fff;text-align:center;padding:18px 0;">PAYMENT DANA</h3>
+  <div class="info">
+    <p><b>Nama  :</b> Ratna</p>
+    <p><b>Nomor :</b> 082180766110</p>
+    <button class="action-btn" onclick="copyNumber('082180766110')">
+      <i data-lucide="copy"></i> Copy Number
+    </button>
   </div>
 </div>
 
 <!-- OVO -->
 <div class="card">
-  <button class="toggle-btn" onclick="toggleShow('ovo', this)">
-    <span class="label"><i data-lucide="credit-card"></i> PAYMENT OVO</span>
-    <span class="arrow">&gt;</span>
-  </button>
-  <div id="ovo" class="content">
-    <div class="info">
-      <p><b>Nama  :</b> SarzzStoreJb</p>
-      <p><b>Nomor :</b> 082180766110</p>
-      <button class="action-btn" onclick="copyNumber('082180766110')">
-        <i data-lucide="copy"></i> Copy Number
-      </button>
-    </div>
+  <h3 style="color:#fff;text-align:center;padding:18px 0;">PAYMENT OVO</h3>
+  <div class="info">
+    <p><b>Nama  :</b> SarzzStoreJb</p>
+    <p><b>Nomor :</b> 082180766110</p>
+    <button class="action-btn" onclick="copyNumber('082180766110')">
+      <i data-lucide="copy"></i> Copy Number
+    </button>
   </div>
 </div>
 
 <!-- GOPAY -->
 <div class="card">
-  <button class="toggle-btn" onclick="toggleShow('gopay', this)">
-    <span class="label"><i data-lucide="dollar-sign"></i> PAYMENT GOPAY</span>
-    <span class="arrow">&gt;</span>
-  </button>
-  <div id="gopay" class="content">
-    <div class="info">
-      <p><b>Nama  :</b> SarzX-OFFICIAL</p>
-      <p><b>Nomor :</b> 082180766110</p>
-      <button class="action-btn" onclick="copyNumber('082180766110')">
-        <i data-lucide="copy"></i> Copy Number
-      </button>
-    </div>
+  <h3 style="color:#fff;text-align:center;padding:18px 0;">PAYMENT GOPAY</h3>
+  <div class="info">
+    <p><b>Nama  :</b> SarzX-OFFICIAL</p>
+    <p><b>Nomor :</b> 082180766110</p>
+    <button class="action-btn" onclick="copyNumber('082180766110')">
+      <i data-lucide="copy"></i> Copy Number
+    </button>
   </div>
 </div>
 
@@ -247,13 +200,6 @@ body{
 
 <script>
 lucide.createIcons();
-function toggleShow(id, btn){
-  const section=document.getElementById(id);
-  const arrow=btn.querySelector(".arrow");
-  section.classList.toggle("show");
-  arrow.classList.toggle("rotate");
-  btn.classList.toggle("active");
-}
 function copyNumber(num){
   navigator.clipboard.writeText(num).then(()=>{
     showToast("Nomor berhasil disalin!");
